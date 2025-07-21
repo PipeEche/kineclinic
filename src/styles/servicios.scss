@@ -1,0 +1,75 @@
+.servicios {
+  background-color: #ffffff;
+  padding: 5rem 2rem;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  &__titulo {
+    font-size: clamp(1.75rem, 5vw, 2.25rem);
+    font-weight: 700;
+    color: #0c1a27;
+    margin-bottom: 1rem;
+  }
+
+  &__descripcion {
+    font-size: 1.125rem;
+    color: #555;
+    margin-bottom: 3rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+  }
+
+  &__grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__card {
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      font-weight: 600;
+      color: #0c1a27;
+    }
+
+    p {
+      font-size: 0.95rem;
+      color: #666;
+      margin-top: 0.5rem;
+    }
+  }
+
+  &__icon {
+    font-size: 2rem;
+    color: #00b2a9;
+  }
+}
