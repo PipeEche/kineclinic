@@ -1,4 +1,3 @@
-// src/components/Footer.jsx
 import '../styles/footer.scss';
 import logo from '/assets/kine.png';
 import { useEffect } from 'react';
@@ -29,13 +28,13 @@ function Footer() {
   return (
     <div className="footer">
       <div className="footer__container">
-        {/* Branding */}
+  
         <div className="footer__column">
           <img className="footer__logo" src={logo} alt="Logo Kinésis" />
           <p>Especialistas en rehabilitación física y tratamiento de lesiones. Tu bienestar es nuestra prioridad.</p>
         </div>
 
-        {/* Enlaces rápidos */}
+
         <div className="footer__column">
           <h3>Enlaces</h3>
           <ul>
@@ -47,7 +46,6 @@ function Footer() {
           </ul>
         </div>
 
-        {/* Servicios destacados */}
         <div className="footer__column">
           <h3>Especialidades</h3>
           <ul>
@@ -58,7 +56,6 @@ function Footer() {
           </ul>
         </div>
 
-        {/* Nosotros */}
         <div className="footer__column">
           <h3>Nosotros</h3>
           <div className="footer__social">

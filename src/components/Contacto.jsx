@@ -1,4 +1,3 @@
-// src/components/Contacto.jsx
 import '../styles/contacto.scss';
 
 function Contacto() {

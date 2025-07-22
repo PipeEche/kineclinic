@@ -1,4 +1,3 @@
-// src/components/Profesionales.jsx
 import '../styles/profesionales.scss';
 
 const profesionales = [

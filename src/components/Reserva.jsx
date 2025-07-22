@@ -1,5 +1,5 @@
 import { useState } from 'react';
-// import axios from 'axios'; // 🔒 Backend desactivado temporalmente
+// import axios from 'axios'; //  Backend desactivado temporalmente
 import '../styles/reserva.scss';
 
 function Reserva() {
@@ -35,7 +35,7 @@ function Reserva() {
 
     setFormulario({ ...formulario, fecha: valor });
 
-    // 🔧 Generación dinámica de horarios simulados
+    // Generación dinámica de horarios simulados
     let horasSimuladas = [];
 
     if (dia >= 1 && dia <= 5) {
@@ -52,7 +52,7 @@ function Reserva() {
 
     setHorasDisponibles(horasSimuladas);
 
-    // 🛑 Llamada al backend desactivada temporalmente
+    // Llamada al backend desactivada temporalmente
     /*
     try {
       const res = await axios.get(`http://localhost:5000/api/reservas/horas-disponibles?fecha=${valor}`);
@@ -81,7 +81,7 @@ function Reserva() {
     });
     setHorasDisponibles([]);
 
-    // 🛑 Llamada POST desactivada temporalmente
+    // Llamada POST desactivada temporalmente
     /*
     try {
       const res = await axios.post('http://localhost:5000/api/reservas', formulario);

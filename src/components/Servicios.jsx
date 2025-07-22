@@ -1,4 +1,3 @@
-// src/components/Servicios.jsx
 import '../styles/servicios.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faBone, faRunning, faBaby, faLungs, faWheelchair, faWater} from '@fortawesome/free-solid-svg-icons';
