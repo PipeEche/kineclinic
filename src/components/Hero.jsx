@@ -14,7 +14,7 @@ function Hero() {
           <a href="#reserva" className="hero__cta">Reserva tu hora</a>
         </div>
         <div className="hero__image">
-          <img src="/assets/heroclinic.png" alt="Imagen KineClinic" />
+          <img src={`${import.meta.env.BASE_URL}assets/heroclinic.png`} alt="Imagen KineClinic" />
         </div>
       </div>
     </section>
