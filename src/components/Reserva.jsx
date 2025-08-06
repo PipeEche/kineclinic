@@ -1,6 +1,8 @@
 import { useState } from 'react';
-// import axios from 'axios'; //  Backend desactivado temporalmente
+import axios from 'axios';
 import '../styles/reserva.scss';
+
+const API_URL = 'http://localhost:5000/api/reservas';
 
 function Reserva() {
   const [formulario, setFormulario] = useState({
@@ -24,7 +26,7 @@ function Reserva() {
     if (!valor) return;
 
     const fecha = new Date(valor + 'T00:00:00');
-    const dia = fecha.getDay(); // 0 = domingo, 6 = sábado
+    const dia = fecha.getDay();
 
     if (dia === 0) {
       alert('Lo sentimos, KineClinic no atiende los domingos. Por favor selecciona otro día.');
@@ -35,27 +37,8 @@ function Reserva() {
 
     setFormulario({ ...formulario, fecha: valor });
 
-    // Generación dinámica de horarios simulados
-    let horasSimuladas = [];
-
-    if (dia >= 1 && dia <= 5) {
-      // Lunes a viernes: 08:00 – 20:00 (hasta 19:00 para intervalos de 1h)
-      for (let h = 8; h <= 19; h++) {
-        horasSimuladas.push(`${h.toString().padStart(2, '0')}:00`);
-      }
-    } else if (dia === 6) {
-      // Sábado: 09:00 – 14:00 (hasta 13:00)
-      for (let h = 9; h <= 13; h++) {
-        horasSimuladas.push(`${h.toString().padStart(2, '0')}:00`);
-      }
-    }
-
-    setHorasDisponibles(horasSimuladas);
-
-    // Llamada al backend desactivada temporalmente
-    /*
     try {
-      const res = await axios.get(`http://localhost:5000/api/reservas/horas-disponibles?fecha=${valor}`);
+      const res = await axios.get(`${API_URL}/horas-disponibles?fecha=${valor}`);
       if (res.data.length === 0) {
         alert('No hay horas disponibles para ese día.');
       }
@@ -63,30 +46,29 @@ function Reserva() {
     } catch (err) {
       alert('No se pudieron cargar las horas disponibles.');
     }
-    */
   };
 
   const manejarEnvio = async (e) => {
     e.preventDefault();
 
-    // ✅ Simulación de envío exitoso:
-    alert('Reserva simulada con éxito. Nos contactaremos contigo para confirmar 🥳');
-    setFormulario({
-      nombre: '',
-      email: '',
-      telefono: '',
-      servicio: '',
-      fecha: '',
-      hora: '',
-    });
-    setHorasDisponibles([]);
+    const { nombre, email, telefono, servicio, fecha, hora } = formulario;
 
-    // Llamada POST desactivada temporalmente
-    /*
+    if (!nombre || !email || !telefono || !servicio || !fecha || !hora) {
+      alert('Por favor completa todos los campos antes de enviar.');
+      return;
+    }
+
     try {
-      const res = await axios.post('http://localhost:5000/api/reservas', formulario);
+      const res = await axios.post(API_URL, formulario);
       alert('Reserva enviada con éxito. Nos contactaremos contigo para confirmar.');
-      setFormulario({ ...formularioInicial });
+      setFormulario({
+        nombre: '',
+        email: '',
+        telefono: '',
+        servicio: '',
+        fecha: '',
+        hora: '',
+      });
       setHorasDisponibles([]);
     } catch (err) {
       if (err.response?.status === 409) {
@@ -95,7 +77,6 @@ function Reserva() {
         alert('Hubo un problema al enviar la reserva. Inténtalo más tarde.');
       }
     }
-    */
   };
 
   return (

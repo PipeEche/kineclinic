@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const Reserva = require('../models/Reserva');
+const ExcelJS = require('exceljs');
+const fs = require('fs');
+const path = require('path');
 
 // 🟢 Crear nueva reserva
 router.post('/', async (req, res) => {
@@ -19,6 +22,36 @@ router.post('/', async (req, res) => {
 
     const nuevaReserva = new Reserva({ nombre, email, telefono, servicio, fecha, hora });
     await nuevaReserva.save();
+
+    // 📄 Guardar en Excel por fecha
+    try {
+      const dirPath = path.join(__dirname, '../data');
+      const fileName = `reservas-${fecha}.xlsx`;
+      const filePath = path.join(dirPath, fileName);
+
+      if (!fs.existsSync(dirPath)) {
+        fs.mkdirSync(dirPath, { recursive: true });
+      }
+
+      const workbook = new ExcelJS.Workbook();
+
+      if (fs.existsSync(filePath)) {
+        await workbook.xlsx.readFile(filePath);
+      }
+
+      let sheet = workbook.getWorksheet('Reservas');
+      if (!sheet) {
+        sheet = workbook.addWorksheet('Reservas');
+        sheet.addRow(['Nombre', 'Email', 'Teléfono', 'Servicio', 'Fecha', 'Hora']);
+      }
+
+      sheet.addRow([nombre, email, telefono, servicio, fecha, hora]);
+      await workbook.xlsx.writeFile(filePath);
+
+      console.log(`✅ Reserva guardada en Excel: ${fileName} → ${nombre} - ${fecha} ${hora}`);
+    } catch (excelError) {
+      console.error('⚠️ Error al guardar en Excel:', excelError.message);
+    }
 
     res.status(201).json({ mensaje: 'Reserva creada con éxito', reserva: nuevaReserva });
   } catch (error) {
@@ -81,6 +114,5 @@ router.get('/horas-disponibles', async (req, res) => {
     res.status(500).json({ mensaje: 'Error del servidor al consultar horas disponibles' });
   }
 });
-
 
 module.exports = router;
