@@ -44,7 +44,7 @@ function Reserva() {
       }
       setHorasDisponibles(res.data);
     } catch (err) {
-      alert('No se pudieron cargar las horas disponibles.');
+      alert('No se pudieron cargar las horas disponibles porque no está conectada la base de datos.');
     }
   };
 
